@@ -13,7 +13,7 @@ then
   echo "-> virt-manager is installed"
 else
   echo "-> installing virt-manager"
-  yes | pacman -S virt-manager
+  pacman -S virt-manager --noconfirm
 fi
 
 if ( which qemu-desktop )
