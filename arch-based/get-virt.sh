@@ -24,7 +24,7 @@ else
   yes | pacman -S qemu-desktop
 fi
 
-if ( which libvirt )
+if ( which libvirtd )
 then
   echo "-> libvirt is installed"
 else
