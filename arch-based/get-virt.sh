@@ -15,3 +15,11 @@ else
   echo "-> installing virt-manager"
   yes | pacman -S virt-manager
 fi
+
+if ( which qemu-desktop )
+then
+  echo "-> qemu-desktop is installed"
+else
+  echo "-> installing qemu-desktop"
+  yes | pacman -S qemu-desktop
+fi
