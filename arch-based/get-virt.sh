@@ -23,3 +23,11 @@ else
   echo "-> installing qemu-desktop"
   yes | pacman -S qemu-desktop
 fi
+
+if ( which libvirt )
+then
+  echo "-> libvirt is installed"
+else
+  echo "-> installing libvirt"
+  yes | pacman -S libvirt
+fi
