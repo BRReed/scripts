@@ -23,3 +23,11 @@ else
   echo "-> installing libvirt"
   yes | pacman -S libvirt
 fi
+
+if ( pacman -Qi edk2-ovmf )
+then
+  echo "-> edk2-ovmf is installed"
+else
+ echo "-> installing edk2-ovmf"
+ yes | pacman -S edk2-ovmf
+fi
