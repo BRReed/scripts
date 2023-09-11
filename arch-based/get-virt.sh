@@ -47,3 +47,12 @@ else
   echo "-> installing iptables-nft"
   yes | pacman -S iptables-nft
 fi
+
+echo "-> enabling libvirtd.service"
+systemctl enable libvirtd.service
+
+echo "-> starting libvirtd.service"
+systemctl start libvirtd.service
+
+echo "-> adding user: $USER to libvirt group"
+usermod -a -G libvirt $USER
