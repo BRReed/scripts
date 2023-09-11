@@ -39,3 +39,11 @@ else
   echo "-> installing dnsmasq"
   yes | pacman -S dnsmasq
 fi
+
+if ( which iptables-nft )
+then
+  echo "-> iptables-nft installed"
+else
+  echo "-> installing iptables-nft"
+  yes | pacman -S iptables-nft
+fi
