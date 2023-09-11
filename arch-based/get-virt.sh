@@ -31,3 +31,11 @@ else
  echo "-> installing edk2-ovmf"
  yes | pacman -S edk2-ovmf
 fi
+
+if ( which dnsmasq )
+then
+  echo "-> dnsmasq installed"
+else
+  echo "-> installing dnsmasq"
+  yes | pacman -S dnsmasq
+fi
