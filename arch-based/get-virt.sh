@@ -56,3 +56,9 @@ systemctl start libvirtd.service
 
 echo "-> adding user: $USER to libvirt group"
 usermod -a -G libvirt $USER
+
+echo "-> enabling virtqemud"
+systemctl enable virtqemud
+
+echo "-> starting virtqemud"
+systemctl start virtqemud
