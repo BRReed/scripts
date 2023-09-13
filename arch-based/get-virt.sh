@@ -48,8 +48,13 @@ else
   yes | pacman -S iptables-nft
 fi
 
-echo "-> enabling libvirtd.service"
-systemctl enable libvirtd.service
+if ( systemctl is-enabled libvirtd )
+then
+  echo "-> libvirtd is enabled"
+else
+  echo "-> enabling libvirtd.service"
+  systemctl enable libvirtd.service
+fi
 
 echo "-> starting libvirtd.service"
 systemctl start libvirtd.service
