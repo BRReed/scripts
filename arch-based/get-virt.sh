@@ -75,11 +75,21 @@ else
   systemctl enable virtqemud
 fi
 
-echo "-> starting virtqemud"
-systemctl start virtqemud
+if ( systemctl is-active virtqemud )
+then
+  echo "-> virtqemud is started"
+else
+  echo "-> starting virtqemud"
+  systemctl start virtqemud
+fi
 
-echo "-> enabling virtstoraged"
-systemctl enable virtstoraged
+if ( systemctl is-enabled virtstoraged )
+then
+  echo "-> virtstoraged is enabled"
+else
+  echo "-> enabling virtstoraged"
+  systemctl enable virtstoraged
+fi
 
 echo "-> starting virtstoraged"
 systemctl start virtstoraged
