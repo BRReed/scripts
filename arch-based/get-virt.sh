@@ -48,6 +48,9 @@ else
   yes | pacman -S iptables-nft
 fi
 
+echo "-> adding user: $USER to libvirt group"
+usermod -a -G libvirt $USER
+
 if ( systemctl is-enabled libvirtd )
 then
   echo "-> libvirtd is enabled"
@@ -63,9 +66,6 @@ else
   echo "-> starting libvirtd.service"
   systemctl start libvirtd.service
 fi
-
-echo "-> adding user: $USER to libvirt group"
-usermod -a -G libvirt $USER
 
 echo "-> enabling virtqemud"
 systemctl enable virtqemud
