@@ -67,8 +67,13 @@ else
   systemctl start libvirtd.service
 fi
 
-echo "-> enabling virtqemud"
-systemctl enable virtqemud
+if ( systemctl is-enabled virtqemud )
+then
+  echo "-> virtqemud is enabled"
+else
+  echo "-> enabling virtqemud"
+  systemctl enable virtqemud
+fi
 
 echo "-> starting virtqemud"
 systemctl start virtqemud
