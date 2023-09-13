@@ -56,8 +56,13 @@ else
   systemctl enable libvirtd.service
 fi
 
-echo "-> starting libvirtd.service"
-systemctl start libvirtd.service
+if ( systemctl is-active libvirtd )
+then
+  echo "-> libvirtd is started"
+else
+  echo "-> starting libvirtd.service"
+  systemctl start libvirtd.service
+fi
 
 echo "-> adding user: $USER to libvirt group"
 usermod -a -G libvirt $USER
