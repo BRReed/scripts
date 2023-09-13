@@ -107,5 +107,10 @@ else
   systemctl enable virtnetworkd
 fi
 
-echo "-> starting virtnetworkd"
-systemctl start virtnetworkd
+if ( systemctl is-active virtnetworkd )
+then
+  echo "-> virtnetwork is started"
+else
+  echo "-> starting virtnetworkd"
+  systemctl start virtnetworkd
+fi
