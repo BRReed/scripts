@@ -91,8 +91,13 @@ else
   systemctl enable virtstoraged
 fi
 
-echo "-> starting virtstoraged"
-systemctl start virtstoraged
+if ( systemctl is-active virtstoraged )
+then
+  echo "-> virtstoraged is started"
+else
+  echo "-> starting virtstoraged"
+  systemctl start virtstoraged
+fi
 
 echo "-> enabling virtnetworkd"
 systemctl enable virtnetworkd
