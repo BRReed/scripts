@@ -9,4 +9,4 @@
 
 2. Download `get-virt.sh` to the directory of your choosing. 
 
-3. Run the command `sh get-virt.sh`
+3. Run the command `arch-based/sh get-virt.sh`
