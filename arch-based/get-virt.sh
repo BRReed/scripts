@@ -68,3 +68,9 @@ systemctl enable virtstoraged
 
 echo "-> starting virtstoraged"
 systemctl start virtstoraged
+
+echo "-> enabling virtnetworkd"
+systemctl enable virtnetworkd
+
+echo "-> starting virtnetworkd"
+systemctl start virtnetworkd
