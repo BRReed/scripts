@@ -62,3 +62,9 @@ systemctl enable virtqemud
 
 echo "-> starting virtqemud"
 systemctl start virtqemud
+
+echo "-> enabling virtstoraged"
+systemctl enable virtstoraged
+
+echo "-> starting virtstoraged"
+systemctl start virtstoraged
