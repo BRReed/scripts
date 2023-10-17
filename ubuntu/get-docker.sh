@@ -1,6 +1,8 @@
 #!/bin/sh
 
 
+## SET UP DOCKERS APT REPOSITORY ##
+
 if ( apt-cache show ca-certificates )
 then
   echo "-> ca-certificates is in packages list"
@@ -23,6 +25,30 @@ then
 else
   echo "-> cannot find gnupg, updating packages list"
   sudo DEBIAN_FRONTEND=noninteractive apt update
+fi
+
+if [ -f /etc/ssl/certs/ca-certificates.crt ]
+then
+  echo "-> /etc/ssl/certs/ca-certificates.crt exists"
+else
+  echo "-> installing ca-certificates"
+  sudo apt install ca-certificates
+fi
+
+if ( which curl )
+then
+  echo "-> curl is installed"
+else
+  echo "-> installing curl"
+  sudo apt install curl
+fi
+
+if ( which gpg )
+then
+  echo "-> gnupg is installed"
+else
+  echo "-> installing gnupg"
+  sudo apt install gnupg
 fi
 
 if [ -d /etc/apt/keyrings ]
