@@ -79,6 +79,14 @@ else
   sudo apt-get update
 fi
 
+if ( apt-cache show docker )
+then
+  echo "-> docker is in package list"
+else
+  echo "-> cannot find docker in packages, updating package list"
+  sudo apt update
+fi
+
 if ( sudo docker ps )
 then
   echo "-> docker-ce is installed"
