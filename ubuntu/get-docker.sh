@@ -78,3 +78,11 @@ else
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   sudo apt-get update
 fi
+
+if ( sudo docker ps )
+then
+  echo "-> docker-ce is installed"
+else
+  echo "-> installing docker-ce"
+  sudo apt install docker-ce -y
+fi
