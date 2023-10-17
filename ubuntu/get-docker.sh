@@ -33,12 +33,28 @@ else
   sudo apt install ca-certificates
 fi
 
+if ( apt-cache show curl )
+then
+  echo "-> curl is in packages list"
+else
+  echo "-> cannot find curl, updating packages list"
+  sudo apt update
+fi
+
 if ( which curl )
 then
   echo "-> curl is installed"
 else
   echo "-> installing curl"
   sudo apt install curl
+fi
+
+if ( apt-cache show gpg )
+then
+  echo "-> gpg is in packages list"
+else
+  echo "-> cannot find gpg, updating packages list"
+  sudo apt update
 fi
 
 if ( which gpg )
