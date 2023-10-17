@@ -1,8 +1,6 @@
 #!/bin/sh
 
 
-## SET UP DOCKERS APT REPOSITORY ##
-
 if ( apt-cache show ca-certificates )
 then
   echo "-> ca-certificates is in packages list"
