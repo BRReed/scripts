@@ -62,7 +62,7 @@ then
   echo "-> /etc/apt/keyrings exists"
 else
   echo "-> creating /etc/apt/keyrings"
-  sudo mkdir -m 0755 /etc/apt/keyrings
+  sudo mkdir -m 0755 -p /etc/apt/keyrings
 fi
 
 if [ -f /etc/apt/keyrings/docker.gpg ]
