@@ -33,14 +33,6 @@ else
   sudo apt install ca-certificates
 fi
 
-if ( apt-cache show curl )
-then
-  echo "-> curl is in packages list"
-else
-  echo "-> cannot find curl, updating packages list"
-  sudo apt update
-fi
-
 if ( which curl )
 then
   echo "-> curl is installed"
@@ -70,7 +62,7 @@ then
   echo "-> /etc/apt/keyrings exists"
 else
   echo "-> creating /etc/apt/keyrings"
-  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo mkdir -m 0755 /etc/apt/keyrings
 fi
 
 if [ -f /etc/apt/keyrings/docker.gpg ]
