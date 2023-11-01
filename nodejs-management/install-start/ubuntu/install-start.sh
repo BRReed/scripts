@@ -8,7 +8,8 @@ else
   npm install
 fi
 
-if ( lsof -i:$1 )
+# $1 expected to be address of app localhost:80, google.com, etc 
+if [ "$(curl -s -o /dev/null -w "%{http_code}" $1)" -eq 200 ]
 then
   echo "the app is running on $1"
 else
