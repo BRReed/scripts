@@ -24,7 +24,7 @@ then
   echo "jammy-cloud vm running"
 else
   echo "spinning up jammy-cloud vm"
-  sh ./ubuntu/spin-up-jammy.sh &
+  sh ./spin-up-jammy.sh&
 fi
 
 i=0
@@ -39,4 +39,3 @@ do
     sleep 60
   fi
 done
-
