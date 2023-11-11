@@ -1,5 +1,20 @@
 #!/bin/sh
 
+if ( curl --version )
+then
+  echo "curl is installed"
+else
+  echo "installing curl"
+  sudo apt install curl -y
+fi
+
+if ( virt-install --version )
+then
+  echo "virt-install is installed"
+else
+  echo "installing virt-install"
+  sudo apt install virtinst -y
+fi
 
 if [ -f "./spin-up-jammy.sh" ] 
 then
@@ -8,16 +23,6 @@ else
   echo "Getting spin-up-jammy.sh"
   curl -o ./spin-up-jammy.sh https://raw.githubusercontent.com/BRReed/scripts/main/vm-management/cloud-init-configs/ubuntu/spin-up-jammy.sh
 fi
-
-if [ -f ./get-virt.sh ]
-then
-  echo "get-virt.sh exists"
-else
-  echo "getting get-virt.sh"
-  curl -o get-virt.sh https://raw.githubusercontent.com/BRReed/scripts/main/get-virt-manager/debian-based/get-virt.sh
-fi
-
-sh get-virt.sh
 
 if ( virsh list | grep jammy-cloud )
 then
@@ -33,6 +38,7 @@ while [ $i -ne 1 ]
 do 
   if ( virsh list | grep jammy-cloud )
   then
+    echo "ITS UP!"
     i=1
   else
     echo "sleeping"
