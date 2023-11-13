@@ -45,3 +45,22 @@ do
     sleep 60
   fi
 done
+
+if [ -f "./get-docker.sh" ]
+then
+  echo "get docker script exists"
+else
+  echo "getting get-docker.sh"
+  curl -o ./get-docker.sh https://raw.githubusercontent.com/BRReed/scripts/main/get-docker/ubuntu/get-docker.sh
+fi
+
+# check if get-docker script already exists on vm
+if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./get-docker.sh ] )
+then
+  echo "get-docker.sh exists on jammy-cloud"
+else
+  echo "getting get-docker.sh onto jammy-cloud"
+  cat ./get-docker.sh | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./get-docker.sh"
+fi
+
+brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}')
