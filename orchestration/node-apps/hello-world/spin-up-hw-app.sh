@@ -38,7 +38,7 @@ while [ $i -ne 1 ]
 do 
   if ( virsh list | grep jammy-cloud )
   then
-    echo "ITS UP!"
+    ssh -o StrictHostKeyChecking=no brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "bash --version"
     i=1
   else
     echo "sleeping"
