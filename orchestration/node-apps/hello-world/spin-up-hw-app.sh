@@ -100,7 +100,7 @@ fi
 
 # DOCKERFILE COMMANDS
 
-if [-f "./Dockerfile" ]
+if [ -f "./Dockerfile" ]
 then
   echo "dockerfile exists locally"
 else
@@ -115,3 +115,55 @@ else
   echo "getting dockerfile onto jammy-cloud"
   cat ./Dockerfile | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./Dockerfile"
 fi
+
+# PACKAGE.JSON COMMANDS
+
+if [ -f "./package.json" ]
+then
+  echo "package.json exists locally"
+else
+  echo "getting package.json"
+  curl -o ./package.json https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/package.json
+fi
+
+if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./package.json ] )
+then
+  echo "package.json exists on jammy-cloud"
+else
+  echo "getting package.json onto jammy-cloud"
+  cat ./package.json | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./package.json"
+fi
+
+if [ -f "./hello-world-app.js" ]
+then 
+  echo "hello-world-app exists locally"
+else
+  echo "getting hello-world-app"
+  curl -o ./hello-world-app.js https://raw.githubusercontent.com/BRReed/hello-relativepath/main/hello-world-app.js
+fi
+
+if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./hello-world-app.js ] )
+then
+  echo "hello-world-app exists on jammy-cloud"
+else
+  echo "getting hello-world-app onto jammy-cloud"
+  cat ./hello-world-app.js | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./hello-world-app.js"
+fi
+
+if [ -f "./install-start.sh" ]
+then 
+  echo "install start node script exists locally"
+else
+  echo "getting install-start script"
+  curl -o ./install-start.sh https://raw.githubusercontent.com/BRReed/scripts/main/nodejs-management/install-start/ubuntu/install-start.sh
+fi
+
+if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./install-start.sh ] )
+then
+  echo "install-start exists on jammy-cloud"
+else
+  echo "getting install-start onto jammy-cloud"
+  cat ./install-start.sh | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./install-start.sh"
+fi
+
+ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'bash < ./install-start.sh&'
