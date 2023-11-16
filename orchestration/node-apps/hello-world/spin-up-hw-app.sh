@@ -56,20 +56,12 @@ else
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl -o ./package.json https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/package.json"
 fi
 
-if [ -f "./hello-world-app.js" ]
-then 
-  echo "hello-world-app exists locally"
-else
-  echo "getting hello-world-app"
-  curl -o ./hello-world-app.js https://raw.githubusercontent.com/BRReed/hello-relativepath/main/hello-world-app.js
-fi
-
 if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./hello-world-app.js ] )
 then
   echo "hello-world-app exists on jammy-cloud"
 else
   echo "getting hello-world-app onto jammy-cloud"
-  cat ./hello-world-app.js | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./hello-world-app.js"
+  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl -o ./hello-world-app.js https://raw.githubusercontent.com/BRReed/hello-relativepath/main/hello-world-app.js"
 fi
 
 if [ -f "./install-start.sh" ]
