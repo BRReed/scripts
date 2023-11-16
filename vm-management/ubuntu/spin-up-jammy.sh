@@ -24,7 +24,7 @@ if (find ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.im
   echo "jammy-server-cloudimg-amd64.img exists"
 else
   echo "Downloading latest jammy-server-cloudimg-amd64.img"
-  wget -O ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+  curl --create-dirs -o ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 fi
 
 if [ -f ./$VM.qcow2 ]; then
