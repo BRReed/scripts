@@ -64,10 +64,10 @@ else
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl -o ./hello-world-app.js https://raw.githubusercontent.com/BRReed/hello-relativepath/main/hello-world-app.js"
 fi
 
-if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./install-start.sh ] )
+if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl localhost:3000" )
 then
-  echo "install-start exists on jammy-cloud"
+  echo "hello world app is started"
 else
-  echo "getting install-start onto jammy-cloud"
-  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl -o ./install-start.sh https://raw.githubusercontent.com/BRReed/scripts/main/nodejs-management/install-start/ubuntu/install-start.sh | bash"
+  echo "running hello-world app start script"
+  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl https://raw.githubusercontent.com/BRReed/scripts/main/nodejs-management/install-start/ubuntu/install-start.sh | bash&"
 fi
