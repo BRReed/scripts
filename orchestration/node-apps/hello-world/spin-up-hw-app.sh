@@ -21,22 +21,8 @@ then
   echo "jammy-cloud vm running"
 else
   echo "spinning up jammy-cloud vm"
-  curl https://raw.githubusercontent.com/BRReed/scripts/main/vm-management/ubuntu/spin-up-jammy.sh | bash
+  export VM=jammy-cloud; curl https://raw.githubusercontent.com/BRReed/scripts/main/vm-management/ubuntu/spin-up-jammy.sh | bash && while ( ! ssh -t -o StrictHostKeyChecking=no brian@$(virsh domifaddr $VM | awk -F'[ /]+' '{if (NR>2) print $5}') 2>/dev/null ); do echo -n "."; done
 fi
-
-i=0
-# wait for jammy-cloud to finish initialization to continue script 
-while [ $i -ne 1 ]
-do 
-  if ( virsh list | grep jammy-cloud )
-  then
-    ssh -o StrictHostKeyChecking=no brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "bash --version"
-    i=1
-  else
-    echo "sleeping"
-    sleep 60
-  fi
-done
 
 # GET DOCKER COMMANDS
 
