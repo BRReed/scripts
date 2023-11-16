@@ -32,30 +32,12 @@ else
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'curl https://raw.githubusercontent.com/BRReed/scripts/main/get-docker/ubuntu/get-docker.sh | bash'
 fi
 
-# GET NODE COMMANDS
-
-if [ -f "./get-node.sh" ]
-then
-  echo "get node script exists locally"
-else
-  echo "getting get node script"
-  curl -o ./get-node.sh https://raw.githubusercontent.com/BRReed/scripts/main/get-node/ubuntu/get-node.sh
-fi
-
-if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./get-node.sh ] )
-then
-  echo "get-node.sh exists on jammy-cloud"
-else
-  echo "getting get-docker.sh onto jammy-cloud"
-  cat ./get-node.sh | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./get-node.sh"
-fi
-
 if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'dpkg -s npm' )
 then
   echo "npm exists on remote vm"
 else
   echo "getting npm on remote vm"
-  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'bash < ./get-node.sh'
+  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'curl https://raw.githubusercontent.com/BRReed/scripts/main/get-node/ubuntu/get-node.sh | bash'
 fi
 
 # DOCKERFILE COMMANDS
