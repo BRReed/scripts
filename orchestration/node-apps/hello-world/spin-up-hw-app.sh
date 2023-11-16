@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if ( curl --version )
 then
   echo "curl is installed"
