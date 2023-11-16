@@ -20,18 +20,18 @@ users:
 EOF
 fi
 
-if (find ./images/jammy-server-cloudimg-amd64.img) then
+if (find ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.img) then
   echo "jammy-server-cloudimg-amd64.img exists"
 else
   echo "Downloading latest jammy-server-cloudimg-amd64.img"
-  wget -O ./images/jammy-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+  wget -O ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 fi
 
 if [ -f ./$VM.qcow2 ]; then
   echo "${VM}.qcow2 already exists"
 else
   echo "creating ${VM}.qcow2"
-  qemu-img create -F qcow2 -b ./images/jammy-server-cloudimg-amd64.img -f qcow2 ./$VM.qcow2 50G
+  qemu-img create -F qcow2 -b ~/spaghetti/scripts/vm-management/images/jammy-server-cloudimg-amd64.img -f qcow2 ./$VM.qcow2 50G
 fi
 
 if (virsh list | grep running | grep $VM) then
