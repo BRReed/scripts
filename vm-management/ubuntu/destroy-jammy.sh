@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# get ip of vm, sshkeygenremove from known host
+
+ssh-keygen -f ~/.ssh/known_hosts -R "$(virsh domifaddr ${VM} | awk -F'[ /]+' '{if (NR>2) print $5}')"
 
 if !(virsh list --all | grep " ${VM} ") then
   echo "jammy-cloud vm does not exist"
