@@ -24,30 +24,12 @@ else
   export VM=jammy-cloud; curl https://raw.githubusercontent.com/BRReed/scripts/main/vm-management/ubuntu/spin-up-jammy.sh | bash && while ( ! ssh -t -o StrictHostKeyChecking=no brian@$(virsh domifaddr $VM | awk -F'[ /]+' '{if (NR>2) print $5}') 2>/dev/null ); do echo -n "."; done
 fi
 
-# GET DOCKER COMMANDS
-
-if [ -f "./get-docker.sh" ]
-then
-  echo "get docker script exists locally"
-else
-  echo "getting get-docker.sh"
-  curl -o ./get-docker.sh https://raw.githubusercontent.com/BRReed/scripts/main/get-docker/ubuntu/get-docker.sh
-fi
-
-if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./get-docker.sh ] )
-then
-  echo "get-docker.sh exists on jammy-cloud"
-else
-  echo "getting get-docker.sh onto jammy-cloud"
-  cat ./get-docker.sh | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./get-docker.sh"
-fi
-
 if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'docker --version' )
 then
   echo "docker exists on remote vm"
 else
   echo "getting docker on remote vm"
-  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'bash < ./get-docker.sh'
+  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'curl https://raw.githubusercontent.com/BRReed/scripts/main/get-docker/ubuntu/get-docker.sh | bash'
 fi
 
 # GET NODE COMMANDS
