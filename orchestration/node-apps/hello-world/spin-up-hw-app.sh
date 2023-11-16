@@ -40,22 +40,12 @@ else
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'curl https://raw.githubusercontent.com/BRReed/scripts/main/get-node/ubuntu/get-node.sh | bash'
 fi
 
-# DOCKERFILE COMMANDS
-
-if [ -f "./Dockerfile" ]
-then
-  echo "dockerfile exists locally"
-else
-  echo "getting dockerfile"
-  curl -o ./Dockerfile https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/Dockerfile
-fi
-
 if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') [ -f ./Dockerfile ] )
 then
   echo "dockerfile exists on jammy-cloud"
 else
   echo "getting dockerfile onto jammy-cloud"
-  cat ./Dockerfile | ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "cat > ./Dockerfile"
+  ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl -o ./Dockerfile https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/Dockerfile"
 fi
 
 # PACKAGE.JSON COMMANDS
