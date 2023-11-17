@@ -41,12 +41,11 @@ else
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') 'curl https://raw.githubusercontent.com/BRReed/scripts/main/get-node/ubuntu/get-node.sh | bash'
 fi
 
-./node-deploy.sh
-
 if ( ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl localhost:3000" )
 then
   echo "hello world app is started"
 else
   echo "running hello-world app start script"
+  ./node-deploy.sh
   ssh -q brian@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl https://raw.githubusercontent.com/BRReed/scripts/main/nodejs-management/install-start/ubuntu/install-start.sh | bash&"
 fi
