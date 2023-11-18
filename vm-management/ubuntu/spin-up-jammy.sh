@@ -8,8 +8,7 @@ else
   tee "./user-data" > /dev/null << EOF
 #cloud-config
 
-hostname: 
-  - ${VM}
+hostname: "${VM}"
 users:
   - default
   - name: brian
