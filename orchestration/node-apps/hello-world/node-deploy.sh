@@ -37,7 +37,7 @@ then
   echo "hello relpath service file exists"
 else
   echo "getting hello-relpath service"
-  sudo curl -o /etc/systemd/system/hello-relpath.service https://raw.githubusercontent.com/BRReed/scripts/main//orchestration/node-apps/hello-world/hello-relpath.service
+  sudo curl -o /etc/systemd/system/hello-relpath.service https://raw.githubusercontent.com/BRReed/scripts/brian/orches-relpath/orchestration/node-apps/hello-world/hello-relpath.service
 fi
 
 if (systemctl is-active hello-relpath)
@@ -45,6 +45,7 @@ then
   echo "hello-relpath is running"
 else
   echo "starting and enabling reboot on restart for hello-relpath"
+  sudo chmod 664 /etc/systemd/system/hello-relpath.service
   sudo systemctl daemon-reload
   sudo systemctl start hello-relpath.service
   sudo systemctl enable hello-relpath.service
