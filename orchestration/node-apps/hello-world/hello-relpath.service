@@ -1,0 +1,13 @@
+[Unit]
+Description=An app to say Hello World.
+
+[Service]
+User=brian
+WorkingDirectory=~/home/brian/
+ExecStart=hello-world-app.js
+# optional items below
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
