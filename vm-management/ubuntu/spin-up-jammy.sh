@@ -11,7 +11,7 @@ else
 hostname: "${VM}"
 users:
   - default
-  - name: brian
+  - name: "${USER}"
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     shell: /bin/bash
     ssh-authorized-keys:
