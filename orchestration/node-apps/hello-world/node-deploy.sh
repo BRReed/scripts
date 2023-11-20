@@ -36,9 +36,14 @@ if (systemctl is-active hello-relpath)
 then
   echo "hello-relpath is running"
 else
-  echo "starting and enabling reboot on restart for hello-relpath"
-  sudo chmod 664 /etc/systemd/system/hello-relpath.service
-  sudo systemctl daemon-reload
+  echo "starting hello-relpath"
   sudo systemctl start hello-relpath.service
+fi
+
+if (systemctl is-enabled hello-relpath)
+then
+  echo "hello-relpath is enabled"
+else
+  echo "enabling hello-relpath"
   sudo systemctl enable hello-relpath.service
 fi
