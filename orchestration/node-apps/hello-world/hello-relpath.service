@@ -4,9 +4,9 @@ Description=An app to say Hello World.
 [Service]
 Type=simple
 User="${USER}"
-WorkingDirectory=%h
-ExecStartPre=npm install %h
-ExecStart=npm start %h
+WorkingDirectory=/home/breed/
+ExecStartPre=npm install /home/breed/
+ExecStart=node /home/breed/hello-world-app.js
 # optional items below
 Restart=always
 RestartSec=3
