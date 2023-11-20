@@ -24,14 +24,6 @@ else
   curl -o ./hello-world-app.js https://raw.githubusercontent.com/BRReed/hello-relativepath/main/hello-world-app.js
 fi
 
-if ( npm ls )
-then
-  echo "Dependencies have been installed"
-else
-  echo "Installing dependencies"
-  npm install
-fi
-
 if (stat /etc/systemd/system/hello-relpath.service)
 then
   echo "hello relpath service file exists"
