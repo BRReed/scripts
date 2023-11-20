@@ -3,7 +3,7 @@ Description=An app to say Hello World.
 
 [Service]
 Type=simple
-User=breed
+User=%u
 WorkingDirectory=/home/breed/
 ExecStartPre=/usr/bin/npm install /home/breed/
 ExecStart=/usr/bin/node /home/breed/hello-world-app.js
