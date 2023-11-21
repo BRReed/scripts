@@ -37,7 +37,7 @@ then
   echo "hello-relpath is running"
 else
   echo "starting hello-relpath"
-  sudo systemctl --user start hello-relpath.service
+  sudo systemctl start hello-relpath.service
 fi
 
 if (systemctl is-enabled hello-relpath)
@@ -45,5 +45,5 @@ then
   echo "hello-relpath is enabled"
 else
   echo "enabling hello-relpath"
-  sudo systemctl --user enable hello-relpath.service
+  sudo systemctl enable hello-relpath.service
 fi
