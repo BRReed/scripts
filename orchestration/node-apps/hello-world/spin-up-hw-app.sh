@@ -38,5 +38,5 @@ then
   echo "hello world app is started"
 else
   echo "starting hello-world-app"
-  ssh -q "${USER}"@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl https://raw.githubusercontent.com/BRReed/scripts/breed/orches-relpath/orchestration/node-apps/hello-world/node-deploy.sh | bash"
+  ssh -q "${USER}"@$(virsh domifaddr jammy-cloud | awk -F'[ /]+' '{if (NR>2) print $5}') "curl https://raw.githubusercontent.com/BRReed/scripts/main/orchestration/node-apps/hello-world/node-deploy.sh | bash"
 fi
