@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if (stat /usr/lib/hello-relpath/package.json)
+if (sudo stat /usr/lib/hello-relpath/package.json)
 then
   echo "package.json exists on jammy-cloud"
 else
@@ -9,7 +9,7 @@ else
   sudo curl -o /usr/lib/hello-relpath/package.json --create-dirs https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/package.json
 fi
 
-if (stat /usr/lib/hello-relpath/hello-world-app.js)
+if (sudo stat /usr/lib/hello-relpath/hello-world-app.js)
 then
   echo "hello-world-app exists on jammy-cloud"
 else
