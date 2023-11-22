@@ -1,12 +1,5 @@
 #!/bin/bash
 
-if (stat ./Dockerfile)
-then
-  echo "dockerfile exists on jammy-cloud"
-else
-  echo "getting dockerfile onto jammy-cloud"
-  curl -o ./Dockerfile https://raw.githubusercontent.com/BRReed/hello-relativepath/main/scripts/docker/hello-world-app/Dockerfile
-fi
 
 if (stat ./package.json)
 then
