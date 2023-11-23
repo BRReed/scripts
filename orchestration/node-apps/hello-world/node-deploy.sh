@@ -22,7 +22,7 @@ then
   echo "hello relpath service file exists"
 else
   echo "getting hello-relpath service"
-  sudo curl -o /etc/systemd/system/hello-relpath.service https://raw.githubusercontent.com/BRReed/scripts/breed/change-home-dir/orchestration/node-apps/hello-world/hello-relpath.service
+  sudo curl -o /etc/systemd/system/hello-relpath.service https://raw.githubusercontent.com/BRReed/scripts/main/orchestration/node-apps/hello-world/hello-relpath.service
 fi
 
 if (systemctl is-active hello-relpath)
