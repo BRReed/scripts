@@ -26,16 +26,16 @@ else
   curl --create-dirs -o stat /var/lib/libvirt/images/jammy-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 fi
 
-if (stat ./$VM.qcow2); then
+if (stat ./${VM}.qcow2); then
   echo "${VM}.qcow2 already exists"
 else
   echo "creating ${VM}.qcow2"
-  qemu-img create -F qcow2 -b /var/lib/libvirt/images/jammy-server-cloudimg-amd64.img -f qcow2 ./$VM.qcow2 50G
+  qemu-img create -F qcow2 -b /var/lib/libvirt/images/jammy-server-cloudimg-amd64.img -f qcow2 ./${VM}.qcow2 50G
 fi
 
-if (virsh list | grep running | grep $VM) then
+if (virsh list | grep running | grep ${VM}) then
   echo "${VM} already exists"
 else
   echo "Installing ${VM} vm"
-  virt-install --name $VM --memory 4096 --vcpus 4 --os-variant ubuntujammy --disk ./$VM.qcow2 --cloud-init user-data=./user-data --import --noautoconsole --autostart
+  virt-install --name ${VM} --memory 4096 --vcpus 4 --os-variant ubuntujammy --disk ./${VM}.qcow2 --cloud-init user-data=./user-data --import --noautoconsole --autostart
 fi
