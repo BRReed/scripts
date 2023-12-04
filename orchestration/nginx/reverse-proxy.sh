@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-if ( nginx --version )
+if ( nginx -v )
 then
   echo "nginx is installed"
 else
   echo "installing nginx"
-  sudo apt install nginx
+  sudo apt install nginx -y
 fi
