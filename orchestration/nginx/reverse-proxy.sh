@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if ( nginx -- version )
+if ( nginx --version )
 then
   echo "nginx is installed"
 else
