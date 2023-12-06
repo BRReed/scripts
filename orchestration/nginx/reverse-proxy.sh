@@ -24,3 +24,19 @@ else
   echo "enabling hw-app"
   sudo ln -s /etc/nginx/sites-available/hw-app.config /etc/nginx/sites-enabled/
 fi
+
+if ( ! sudo stat /etc/nginx/sites-enabled/default )
+then
+  echo "default nginx site is not enabled"
+else
+  echo "disabling default nginx site"
+  sudo rm /etc/nginx/sites-enabled/default
+fi
+
+if (curl -v --silent localhost 2>&1 | grep "Hello, World!")
+then
+  echo "reverse proxy is established"
+else
+  echo "reloading nginx service"
+  sudo service nginx reload
+fi
