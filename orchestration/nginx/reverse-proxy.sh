@@ -14,7 +14,7 @@ then
   echo "hw-app config file exists"
 else
   echo "getting hw-app.config"
-  sudo curl -o /etc/nginx/sites-available/hw-app.config PLACEHOLDER FOR CONFIG URL
+  sudo curl -o /etc/nginx/sites-available/hw-app.config https://raw.githubusercontent.com/BRReed/scripts/main/orchestration/node-apps/hello-world/hw-app.config
 fi
 
 if (sudo stat /etc/nginx/sites-enabled/hw-app.config)
